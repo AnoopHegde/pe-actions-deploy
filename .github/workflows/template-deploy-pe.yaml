@@ -7,7 +7,11 @@ on:
       manifestPath:
         description: The path to the PE Manifest YAML file
         required: true
-        type: string  
+        type: string
+      env_file:
+        description: The environment variable file
+        required: true
+        type: string   
       environment:
         description: The environment to be created
         required: true
@@ -44,10 +48,6 @@ jobs:
      #        .github/variables/kafka-var.yml
 
       - uses: joshjohanning/replace-tokens@v1.4
-        #env:
-        #  APIURL: ${{ vars.APIURL }}
-        #  PRINCIPAL_ID: ${{ vars.PRINCIPAL_ID }}
-        #  REPLICATION_NAME: ${{ vars.REPLICATION_NAME }} 
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
