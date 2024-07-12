@@ -47,6 +47,10 @@ jobs:
      #     groups: |
      #        .github/variables/kafka-var.yml
 
+      - name: retreive the env_file to github output
+        id: retreive-input
+        run: cat ${{ inputs.env_file }} >> $GITHUB_OUTPUT
+
       - uses: joshjohanning/replace-tokens@v1.4
         with:
           tokenPrefix: '{{'
