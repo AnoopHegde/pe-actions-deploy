@@ -61,7 +61,7 @@ jobs:
 
       - uses: joshjohanning/replace-tokens@v1.4
         with:
-          env: $GITHUB_ENV 
+          files: '["/tmp/env_file.txt"]'
           tokenPrefix: '{{'
           tokenSuffix: '}}'
           files: '["**/*-manifest.yaml"]'  
