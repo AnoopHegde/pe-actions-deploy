@@ -58,12 +58,10 @@ jobs:
       - name: retreive the env_file to github output
         id: retreive-input
         run: |
-           cat /tmp/env_file.txt >> $GITHUB_ENV
-           echo $GITHUB_ENV | grep PRINCIPAL_ID
+           cat /tmp/env_file.txt >> $GITHUB_ENV | grep PRINCIPAL_ID
 
       - uses: joshjohanning/replace-tokens@v1.4
         with:
-          #files: '["/tmp/env_file.txt"]'
           tokenPrefix: '{{'
           tokenSuffix: '}}'
           files: '["**/*-manifest.yaml"]'  
