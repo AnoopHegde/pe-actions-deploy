@@ -5,9 +5,9 @@ inputs:
   manifestPath:
     description: The path to the PE Manifest YAML File
     required: true
-  #env_file: 
-  #  description: the environment variable file
-  #  required: true   
+  env_file: 
+    description: the environment variable file
+    required: true   
   environment:
     description: The environment name to deploy to
     required: true  
