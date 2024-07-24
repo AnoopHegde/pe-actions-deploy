@@ -47,13 +47,6 @@ jobs:
         with:
           name: env_file
           path: /tmp
-             
-           
-     # - name: Inject Variables
-     #   uses: lindluni/actions-variable-groups@v2
-     #   with:
-     #     groups: |
-     #        .github/variables/kafka-var.yml
 
       - name: retreive the env_file to github output
         id: retreive-input
