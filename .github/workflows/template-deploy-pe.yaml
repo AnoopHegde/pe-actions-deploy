@@ -55,9 +55,9 @@ jobs:
      #     groups: |
      #        .github/variables/kafka-var.yml
 
-     - name: retreive the env_file to github output
-       id: retreive-input
-       run: |
+      - name: retreive the env_file to github output
+        id: retreive-input
+        run: |
           cat /tmp/env_file.txt >> $GITHUB_ENV
           echo $GITHUB_ENV
 
@@ -76,5 +76,3 @@ jobs:
         with:
           manifestPath: ${{ inputs.manifestPath }}
           environment: ${{ inputs.environment }}
-
-        
