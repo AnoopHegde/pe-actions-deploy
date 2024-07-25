@@ -54,7 +54,6 @@ jobs:
           cat /tmp/env_file.txt >> $GITHUB_ENV
 
       - uses: joshjohanning/replace-tokens@v1.4
-        needs: retreive-input
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
