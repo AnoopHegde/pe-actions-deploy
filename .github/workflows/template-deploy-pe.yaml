@@ -53,6 +53,11 @@ jobs:
         run: |
           cat /tmp/env_file.txt >> $GITHUB_ENV
 
+      - name: cat before
+        run: | 
+          cat test-manifest.yaml
+          cat test-tokenized-manifest.yaml    
+
       - uses: joshjohanning/replace-tokens@v1.4
         env:
           GITHUB_ENV: ${{ env.GITHUB_ENV }}
@@ -62,8 +67,10 @@ jobs:
           files: '["**/*-manifest.yaml"]'  
 
       - name: cat after
-        run: cat test-manifest.yaml                  
-           
+        run: |
+          cat test-manifest.yaml                  
+          cat test-tokenized-manifest.yaml
+
       - name: Plan
         id: plan
         uses: ./pe-actions/.github/actions/pe-plan
