@@ -48,10 +48,10 @@ jobs:
           name: env_file
           path: /tmp
 
-      - name: retreive the env_file to github output
-        id: retreive-input
-        run: |
-          cat /tmp/env_file.txt >> $GITHUB_ENV
+      #- name: retreive the env_file to github output
+      #  id: retreive-input
+      #  run: |
+      #    cat /tmp/env_file.txt >> $GITHUB_ENV
 
       - name: cat before
         run: | 
@@ -60,7 +60,7 @@ jobs:
 
       - uses: joshjohanning/replace-tokens@v1.4
         env:
-          GITHUB_ENV: ${{ steps.retrieve-input.outputs.GITHUB_ENV }}
+          GITHUB_ENV: ${{ steps.download_artifact.outputs.artifact_path }}
           #GITHUB_ENV: ${{ env.GITHUB_ENV }}
         with:
           tokenPrefix: '{{'
