@@ -52,7 +52,7 @@ jobs:
         id: retreive-input
         run: |
           cat /tmp/env_file.txt | grep -v "env." | sed 's/^/env./' >> $GITHUB_ENV
-          echo "GITHUB_ENV=$GITHUB_ENV" >> $GITHUB_ENV
+          echo $GITHUB_ENV
 
       - name: cat before
         run: | 
