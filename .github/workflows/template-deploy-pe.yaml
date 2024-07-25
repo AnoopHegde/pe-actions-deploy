@@ -51,7 +51,9 @@ jobs:
       - name: retreive the env_file to github output
         id: retreive-input
         run: |
-          cat /tmp/env_file.txt | grep -v "::" >> $GITHUB_ENV
+          cat /tmp/env_file.txt | grep -v "::" | while read line; do
+            echo $line >> $GITHUB_ENV
+          done
 
       - name: cat before
         run: | 
