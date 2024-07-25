@@ -62,8 +62,8 @@ jobs:
         env:
           GITHUB_ENV: ${{ env.GITHUB_ENV }}
         with:
-          tokenPrefix: '{{'
-          tokenSuffix: '}}'
+          tokenPrefix: '{{env'
+          tokenSuffix: 'env}}'
           files: '["**/*-manifest.yaml"]'  
 
       - name: cat after
