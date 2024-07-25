@@ -60,7 +60,8 @@ jobs:
 
       - uses: joshjohanning/replace-tokens@v1.4
         env:
-          GITHUB_ENV: ${{ env.GITHUB_ENV }}
+          GITHUB_ENV: ${{ steps.retrieve-input.outputs.GITHUB_ENV }}
+          #GITHUB_ENV: ${{ env.GITHUB_ENV }}
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
