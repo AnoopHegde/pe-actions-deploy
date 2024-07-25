@@ -54,6 +54,8 @@ jobs:
           cat /tmp/env_file.txt >> $GITHUB_ENV
 
       - uses: joshjohanning/replace-tokens@v1.4
+        env:
+          GITHUB_ENV: ${{ env.GITHUB_ENV }}
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
