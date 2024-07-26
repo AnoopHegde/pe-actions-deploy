@@ -8,10 +8,10 @@ on:
         description: The path to the PE Manifest YAML file
         required: true
         type: string
-      env_file:
-        description: The environment variable file
-        required: true
-        type: string   
+      #env_file:
+      #  description: The environment variable file
+      #  required: true
+      #  type: string   
       environment:
         description: The environment to be created
         required: true
@@ -41,23 +41,25 @@ jobs:
            path: pe-actions
            token: ${{ steps.generate-token.outputs.token }}
 
-      - name: download artifact
-        id: download_artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: env_file
-          path: /tmp
+    #  - name: download artifact
+    #    id: download_artifact
+    #    uses: actions/download-artifact@v3
+    #    with:
+    #      name: env_file
+    #      path: /tmp
 
-      - name: retreive the env_file to github output
-        id: retreive-input
-        run: |
-          cat /tmp/env_file.txt
+    #  - name: retreive the env_file to github output
+    #    id: retreive-input
+    #    run: |
+    #      cat /tmp/env_file.txt
           
 
       - name: cat before
         run: | 
           cat test-manifest.yaml
-          cat test-tokenized-manifest.yaml    
+          cat test-tokenized-manifest.yaml
+        env:
+          PRINCIPAL_ID:   
 
       - uses: joshjohanning/replace-tokens@v1.4
         env:
