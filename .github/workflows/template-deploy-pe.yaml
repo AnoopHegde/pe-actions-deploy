@@ -38,7 +38,7 @@ jobs:
         uses: lindluni/actions-variable-groups@v2
         with:
           groups: |
-            .github/variables/${{ inputs.environment }}/variables.yml
+            .github/variables/sbx/variables.yml
 
       - name: Perform Replace tokens 
         uses: cschleiden/replace-tokens@v1
