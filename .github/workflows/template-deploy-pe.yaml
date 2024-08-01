@@ -26,6 +26,14 @@ jobs:
         run: | 
           cat kafka-manifest-create.yaml 
 
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GHA_APPID }}
+          private-key: ${{ secrets.GHA_APPKEY }}
+          owner: AnoopHegde   
+
       - name: Inject End-User Environment Variables
         uses: lindluni/actions-variable-groups@v2.5.0
         with:
@@ -37,15 +45,11 @@ jobs:
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
-          files: '["kafka-manifest-create.yaml"]'      
+          files: '["kafka-manifest-create.yaml"]'          
 
-      - name: Generate a token
-        id: generate-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.GHA_APPID }}
-          private-key: ${{ secrets.GHA_APPKEY }}
-          owner: AnoopHegde   
+      - name: cat after
+        run: |
+          cat kafka-manifest-create.yaml    
 
       - name: Checkout PE actions
         uses: actions/checkout@v4.1.5
@@ -53,10 +57,6 @@ jobs:
            repository: AnoopHegde/pe-actions-deploy
            path: pe-actions
            token: ${{ steps.generate-token.outputs.token }}
-
-      - name: cat after
-        run: |
-          cat kafka-manifest-create.yaml
          
       - name: Plan
         id: plan
