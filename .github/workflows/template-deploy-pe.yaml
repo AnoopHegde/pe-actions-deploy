@@ -28,7 +28,7 @@ jobs:
           owner: AnoopHegde
 
       - name: Checkout
-        uses: actions/checkout@v4.1.5   
+        uses: actions/checkout@v3   
 
       - name: cat before
         run: | 
@@ -45,14 +45,14 @@ jobs:
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
-          files: '["kafka-manifest-create.yaml"]'          
+          files: '["**/*-manifest-create.yaml"]'          
 
       - name: cat after
         run: |
           cat kafka-manifest-create.yaml    
 
       - name: Checkout PE actions
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v3
         with:
            repository: AnoopHegde/pe-actions-deploy
            path: pe-actions
