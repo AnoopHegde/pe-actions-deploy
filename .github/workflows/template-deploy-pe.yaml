@@ -37,7 +37,7 @@ jobs:
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
-          files: '["**/*-manifest-create.yaml"]'      
+          files: '["kafka-manifest-create.yaml"]'      
 
       - name: Generate a token
         id: generate-token
