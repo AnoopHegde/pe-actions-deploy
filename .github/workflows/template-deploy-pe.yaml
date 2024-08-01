@@ -29,8 +29,8 @@ jobs:
       - name: Inject End-User Environment Variables
         uses: lindluni/actions-variable-groups@v2.5.0
         with:
-        groups: |
-          .github/variables/${{ inputs.environment }}/variables.yml
+          groups: |
+            .github/variables/${{ inputs.environment }}/variables.yml
 
       - name: Perform Replace tokens 
         uses: joshjohanning/replace-tokens@v1.4
