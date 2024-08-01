@@ -19,20 +19,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.5 
-
-      - name: cat before
-        run: | 
-          cat kafka-manifest-create.yaml 
-
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ secrets.GHA_APPID }}
           private-key: ${{ secrets.GHA_APPKEY }}
-          owner: AnoopHegde   
+          owner: AnoopHegde
+
+      - name: Checkout
+        uses: actions/checkout@v4.1.5   
+
+      - name: cat before
+        run: | 
+          cat kafka-manifest-create.yaml        
 
       - name: Inject End-User Environment Variables
         uses: lindluni/actions-variable-groups@v2
