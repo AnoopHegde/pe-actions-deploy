@@ -8,21 +8,37 @@ on:
         description: The path to the PE Manifest YAML file
         required: true
         type: string
-      #env_file:
-      #  description: The environment variable file
-      #  required: true
-      #  type: string   
       environment:
         description: The environment to be created
         required: true
         type: string
 
 jobs:
-  testdeploy:
+  plan:
     name: "Test Job"
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.5 
+
+      - name: cat before
+        run: | 
+          cat kafka-manifest-create.yaml 
+
+      - name: Inject End-User Environment Variables
+        uses: lindluni/actions-variable-groups@v2.5.0
+        with:
+        groups: |
+          .github/variables/${{ inputs.environment }}/variables.yml
+
+      - name: Perform Replace tokens 
+        uses: joshjohanning/replace-tokens@v1.4
+        with:
+          tokenPrefix: '{{'
+          tokenSuffix: '}}'
+          files: '["**/*-manifest-create.yaml"]'      
+
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
@@ -31,50 +47,17 @@ jobs:
           private-key: ${{ secrets.GHA_APPKEY }}
           owner: AnoopHegde   
 
-      - name: Checkout
-        uses: actions/checkout@v3 
-
       - name: Checkout PE actions
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.5
         with:
            repository: AnoopHegde/pe-actions-deploy
            path: pe-actions
            token: ${{ steps.generate-token.outputs.token }}
 
-    #  - name: download artifact
-    #    id: download_artifact
-    #    uses: actions/download-artifact@v3
-    #    with:
-    #      name: env_file
-    #      path: /tmp
-
-    #  - name: retreive the env_file to github output
-    #    id: retreive-input
-    #    run: |
-    #      cat /tmp/env_file.txt
-          
-
-      - name: cat before
-        run: | 
-          cat test-manifest.yaml
-          cat test-tokenized-manifest.yaml
-        env:
-          PRINCIPAL_ID:   
-
-      - uses: joshjohanning/replace-tokens@v1.4
-        env:
-          GITHUB_ENV: ${{ steps.retrieve-input.outputs.GITHUB_ENV }}
-          #GITHUB_ENV: ${{ env.GITHUB_ENV }}
-        with:
-          tokenPrefix: '{{'
-          tokenSuffix: '}}'
-          files: '["**/*-manifest.yaml"]'  
-
       - name: cat after
         run: |
-          cat test-manifest.yaml                  
-          cat test-tokenized-manifest.yaml
-
+          cat kafka-manifest-create.yaml
+         
       - name: Plan
         id: plan
         uses: ./pe-actions/.github/actions/pe-plan
