@@ -5,6 +5,9 @@ inputs:
   manifestPath:
     description: The path to the PE Manifest YAML File
     required: true
+  variable-group-Path:
+    description: The path to the variable group file
+    required: true      
   environment:
     description: The environment name to deploy to
     required: true  

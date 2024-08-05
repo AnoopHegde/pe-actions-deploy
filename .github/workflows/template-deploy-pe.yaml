@@ -8,6 +8,10 @@ on:
         description: The path to the PE Manifest YAML file
         required: true
         type: string
+      variable-group-Path:
+        description: The path to the variable group file
+        required: true
+        type: string  
       environment:
         description: The environment to be created
         required: true
@@ -24,20 +28,20 @@ jobs:
 
       - name: cat before
         run: | 
-          cat test-new-manifest.yaml   
+          cat ${{ inputs.manifestPath }}  
 
       - name: Inject End-User Environment Variables
         uses: lindluni/actions-variable-groups@v2.5.0
         with:
           groups: |
-            .github/variables/kafka-var.yml  
+            ${{ inputs.variable-group-Path }}  
 
       - name: Perform Replace tokens in manifest
         uses: joshjohanning/replace-tokens@v1.4
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
-          files: '["**/*-manifest.yaml"]'                  
+          files: ${{ inputs.manifestPath }}                  
 
       - name: Generate a token
         id: generate-token
@@ -49,7 +53,7 @@ jobs:
 
       - name: cat after
         run: |
-          cat test-new-manifest.yaml   
+          cat ${{ inputs.manifestPath }}   
 
       - name: Checkout PE actions
         uses: actions/checkout@v3
