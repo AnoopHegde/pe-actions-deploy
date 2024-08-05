@@ -22,6 +22,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4 
 
+      - name: cat before
+        run: | 
+          cat test-new-manifest.yaml   
+
+      - name: Inject End-User Environment Variables
+        uses: lindluni/actions-variable-groups@v2
+        with:
+          groups: |
+            .github/variables/kafka-var.yml  
+
+      - name: Perform Replace tokens in manifest
+        uses: joshjohanning/replace-tokens@v1.4
+        with:
+          tokenPrefix: '{{'
+          tokenSuffix: '}}'
+          files: '["**/*-manifest.yaml"]'                  
+
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
@@ -29,23 +46,6 @@ jobs:
           app-id: ${{ secrets.GHA_APPID }}
           private-key: ${{ secrets.GHA_APPKEY }}
           owner: AnoopHegde
-
-      - name: cat before
-        run: | 
-          cat test-new-manifest.yaml      
-
-      - name: Inject End-User Environment Variables
-        uses: lindluni/actions-variable-groups@v2
-        with:
-          groups: |
-            .github/variables/kafka-var.yml
-
-      - name: Perform Replace tokens in manifest
-        uses: joshjohanning/replace-tokens@v1.4
-        with:
-          tokenPrefix: '{{'
-          tokenSuffix: '}}'
-          files: '["**/*-manifest.yaml"]'          
 
       - name: cat after
         run: |
