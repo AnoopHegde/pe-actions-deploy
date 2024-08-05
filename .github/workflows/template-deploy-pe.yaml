@@ -27,7 +27,7 @@ jobs:
           cat test-new-manifest.yaml   
 
       - name: Inject End-User Environment Variables
-        uses: lindluni/actions-variable-groups@v2
+        uses: lindluni/actions-variable-groups@v2.5.0
         with:
           groups: |
             .github/variables/kafka-var.yml  
