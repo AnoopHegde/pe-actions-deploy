@@ -36,6 +36,9 @@ jobs:
           groups: |
             ${{ inputs.variable-group-Path }}  
 
+      - name: Print Environment Variables
+        run: env | sort          
+
       - name: Perform Replace tokens in manifest
         uses: joshjohanning/replace-tokens@v1.4
         with:
