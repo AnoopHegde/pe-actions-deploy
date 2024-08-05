@@ -32,7 +32,7 @@ jobs:
 
       - name: cat before
         run: | 
-          cat kafka-manifest-create.yaml        
+          cat test-manifest.yaml      
 
       - name: Inject End-User Environment Variables
         uses: lindluni/actions-variable-groups@v2
@@ -49,7 +49,7 @@ jobs:
 
       - name: cat after
         run: |
-          cat kafka-manifest-create.yaml    
+          cat test-manifest.yaml    
 
       - name: Checkout PE actions
         uses: actions/checkout@v3
