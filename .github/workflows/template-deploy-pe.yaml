@@ -41,8 +41,8 @@ jobs:
             .github/variables/sbx/variables.yml
 
       - name: Perform Replace tokens 
-        uses: cschleiden/replace-tokens@v1
-        #uses: joshjohanning/replace-tokens@v1.4
+        #uses: cschleiden/replace-tokens@v1
+        uses: joshjohanning/replace-tokens@v1.4
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
