@@ -32,13 +32,13 @@ jobs:
 
       - name: cat before
         run: | 
-          cat test-manifest.yaml      
+          cat test-new-manifest.yaml      
 
       - name: Inject End-User Environment Variables
         uses: lindluni/actions-variable-groups@v2
         with:
           groups: |
-            .github/variables/sbx/variables.yml
+            .github/variables/kafka-var.yml
 
       - name: Perform Replace tokens in manifest
         uses: joshjohanning/replace-tokens@v1.4
@@ -49,7 +49,7 @@ jobs:
 
       - name: cat after
         run: |
-          cat test-manifest.yaml    
+          cat test-new-manifest.yaml   
 
       - name: Checkout PE actions
         uses: actions/checkout@v3
