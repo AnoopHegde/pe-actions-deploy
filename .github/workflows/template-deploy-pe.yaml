@@ -45,7 +45,7 @@ jobs:
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
-          files: '["**/**/*-manifest-create.yaml"]'          
+          files: '["**/*-manifest.yaml"]'          
 
       - name: cat after
         run: |
