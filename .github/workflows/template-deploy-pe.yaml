@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4 
+
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
@@ -26,9 +29,6 @@ jobs:
           app-id: ${{ secrets.GHA_APPID }}
           private-key: ${{ secrets.GHA_APPKEY }}
           owner: AnoopHegde
-
-      - name: Checkout
-        uses: actions/checkout@v3   
 
       - name: cat before
         run: | 
@@ -40,13 +40,12 @@ jobs:
           groups: |
             .github/variables/sbx/variables.yml
 
-      - name: Perform Replace tokens 
-        #uses: cschleiden/replace-tokens@v1
+      - name: Perform Replace tokens in manifest
         uses: joshjohanning/replace-tokens@v1.4
         with:
           tokenPrefix: '{{'
           tokenSuffix: '}}'
-          files: '["**/*-manifest-create.yaml"]'          
+          files: '["**/**/*-manifest-create.yaml"]'          
 
       - name: cat after
         run: |
