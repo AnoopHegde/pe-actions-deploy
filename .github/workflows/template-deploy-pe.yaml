@@ -8,10 +8,10 @@ on:
         description: The path to the PE Manifest YAML file
         required: true
         type: string
-      #variable-group-Path:
-      #  description: The path to the variable group file
-      #  required: true
-      #  type: string  
+      variable-group-Path:
+        description: The path to the variable group file
+        required: true
+        type: string  
       environment:
         description: The environment to be created
         required: true
@@ -30,24 +30,24 @@ jobs:
         run: | 
           cat ${{ inputs.manifestPath }}  
 
-    #  - name: Inject End-User Environment Variables
-    #    uses: lindluni/actions-variable-groups@v2.5.0
-    #    with:
-    #      groups: |
-    #        ${{ inputs.variable-group-Path }} 
+      - name: Inject End-User Environment Variables
+        uses: lindluni/actions-variable-groups@v2.5.0
+        with:
+          groups: |
+            ${{ inputs.variable-group-Path }} 
 
-      - name: script to inject env variables 
-        run: |
-          import json
-          import os
-
-          env_file = os.getenv('GITHUB_ENV')
-
-          y = json.loads('''${{ toJson(vars) }}''')
-          with open(env_file, "a") as file:
-              for key, value in y.items():
-                  file.write(f"{key}={value}\n")
-        shell: python
+    #  - name: script to inject env variables 
+    #    run: |
+    #      import json
+    #      import os
+#
+    #      env_file = os.getenv('GITHUB_ENV')
+#
+    #      y = json.loads('''${{ toJson(vars) }}''')
+    #      with open(env_file, "a") as file:
+    #          for key, value in y.items():
+    #              file.write(f"{key}={value}\n")
+    #    shell: python
 
       - name: Print Environment Variables
         run: env | sort          
